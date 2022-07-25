@@ -20,7 +20,8 @@ export const CardHeading = styled('div')({
   position: 'absolute',
   fontSize: '18px',
   color: 'white',
-  marginTop: '-50px',
+  padding: '0.5rem',
+  marginTop: '-75px'
 });
 
 export const CardBody = styled('div')({
@@ -55,4 +56,5 @@ export const CardValue = styled(CardKey)({
   textAlign: 'right',
   fontStyle: 'italic',
   color: 'orange',
+  padding: '0.25rem',
 });
