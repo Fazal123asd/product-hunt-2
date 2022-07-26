@@ -5,7 +5,7 @@ import { CardListContainer } from './StyledCardList';
 const CardList = ({ humans }) => {
     return (<CardListContainer>
         {humans.map(({ id, name, status, species, gender, image, created, origin, location}) => {
-            return <Link href={`/character/${id}`}><a><Card key={id}
+            return <Link key={id} href={`/character/${id}`}><a><Card 
                 id={id}
                 name={name}
                 status={status}
