@@ -1,4 +1,5 @@
 
+import { getDifferenceYears } from 'apps/product/utils/helper';
 import {
     CardContainer, CardHeading, CardBody, CardFieldset, ContentBox, CardKey, CardValue
 } from './styledCard';
@@ -16,7 +17,7 @@ function Card(props) {
             />
             <CardHeading>
                 <h2>{name}</h2>
-                <small>{`id:${id} ${created}`}</small>
+                <small>{`id:${id} - ${getDifferenceYears(created.slice(0,10))}`}</small>
             </CardHeading>
             <CardBody>
                 <CardFieldset>

@@ -10,6 +10,10 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  reactStrictMode: true,
+  images: {
+    domains: ['rickandmortyapi.com'],
+  },
 };
 
 module.exports = withNx(nextConfig);
