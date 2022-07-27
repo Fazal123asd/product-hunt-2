@@ -2,13 +2,15 @@ import { useState } from 'react';
 import SearchBox from '../components/search-box/SearchBox';
 import CardList from '../components/card-list/CardList';
 import { getData } from '../utils/data';
+import FilterReact from 'filter-react';
+import { FlexContainer, SearchBoxWrapper } from './styledIndex';
 
-type origin ={
-  name: string
-}
-type location ={
-  name: string
-}
+type origin = {
+  name: string;
+};
+type location = {
+  name: string;
+};
 
 export type resultsArray = {
   id: string;
@@ -28,14 +30,16 @@ export type character = {
 };
 
 export type characterProps = {
-  data: character
+  data: character;
 };
+
 
 export function Index(props: characterProps) {
   const { data } = props;
   const { results } = data;
   const [searchField, setSearchField] = useState('');
   const [filteredCard, setFilterCard] = useState(results);
+  const [onOrder, setOrder] = useState('ase');
 
   const onSearch = () => {
     const newFilteredMonsters = results.filter((result) => {
@@ -48,13 +52,48 @@ export function Index(props: characterProps) {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
+
+  const onFilter = (e) => {
+    setOrder(e.target.value);
+    const tempArr = filteredCard.sort((a: any, b: any) => {
+      return onOrder === 'des' ? a.id - b.id : b.id - a.id;
+    });
+
+    setFilterCard([...tempArr]);
+  };
+
+  const options = [
+    {
+      name: 'ASCENDING',
+      value: 'ase',
+    },
+    {
+      name: 'DESCENDING',
+      value: 'des',
+    },
+  ];
+
   return (
     <>
-      <SearchBox
-        onChangeHandler={onSearchChange}
-        onSearchHandler={onSearch}
-        placeholder="search"
-      />
+      <FlexContainer>
+        <SearchBoxWrapper>
+          <SearchBox
+            onChangeHandler={onSearchChange}
+            onSearchHandler={onSearch}
+            placeholder="search"
+          />
+        </SearchBoxWrapper>
+
+        <FilterReact
+          options={options}
+          handler={onFilter}
+          value={onOrder}
+          styles={{
+            border: '1px solid gray',
+            padding: '0.5rem',
+          }}
+        />
+      </FlexContainer>
       <CardList humans={filteredCard} />
     </>
   );
@@ -63,7 +102,9 @@ export function Index(props: characterProps) {
 export default Index;
 
 export async function getServerSideProps() {
-  const data = await getData<character>(`https://rickandmortyapi.com/api/character/`);
+  const data = await getData<character>(
+    `https://rickandmortyapi.com/api/character/`
+  );
   if (!data) {
     return <p>Loading...</p>;
   }
