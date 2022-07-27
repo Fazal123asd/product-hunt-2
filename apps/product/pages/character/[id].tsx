@@ -1,6 +1,10 @@
-import Card from 'apps/product/components/card/Card';
+import Card from '../../components/card/Card';
 import styled from 'styled-components';
+import { resultsArray } from '../../pages/index';
 
+type CharacterProps = {
+  data: resultsArray;
+  };
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -12,7 +16,7 @@ const Container = styled.div`
 
 
 
-export default function Character({ data }) {
+export default function Character({ data }: CharacterProps) {
 
   
   const { id, name, status, species, gender, image, created, origin, location} = data
@@ -24,7 +28,7 @@ export default function Character({ data }) {
                 status={status}
                 species={species}
                 gender={gender}
-                imageUrl={image}
+                image={image}
                 created={created}
                 origin={origin}
                 location={location} />

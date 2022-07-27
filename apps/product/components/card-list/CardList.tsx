@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import Card from '../card/Card';
 import { CardListContainer } from './StyledCardList';
+import { resultsArray } from '../../pages/index';
 
-const CardList = ({ humans }) => {
+type cardListProps = {
+    humans: resultsArray[];
+  };
+
+const CardList = ({ humans }: cardListProps) => {
     return (<CardListContainer>
         {humans.map(({ id, name, status, species, gender, image, created, origin, location}) => {
             return <Link key={id} href={`/character/${id}`}><a><Card 
@@ -11,7 +16,7 @@ const CardList = ({ humans }) => {
                 status={status}
                 species={species}
                 gender={gender}
-                imageUrl={image}
+                image={image}
                 created={created}
                 origin={origin}
                 location={location}

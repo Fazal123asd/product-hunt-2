@@ -1,15 +1,17 @@
-import { getDifferenceYears } from 'apps/product/utils/helper';
+import { getDifferenceYears } from '../../utils/helper';
 import { CardContainer, CardHeading, CardBody } from './styledCard';
 import CardFields from '../card-details/CardDetails';
+import { resultsArray } from '../../pages/index';
 
-function Card(props) {
+
+function Card(props: resultsArray) {
   const {
     id,
     name,
     status,
     species,
     gender,
-    imageUrl,
+    image,
     created,
     origin,
     location,
@@ -47,7 +49,7 @@ function Card(props) {
     <CardContainer data-testid="1">
       <img
         style={{ borderRadius: '10px' }}
-        src={imageUrl}
+        src={image}
         alt={name}
         width="100%"
         height="50%"

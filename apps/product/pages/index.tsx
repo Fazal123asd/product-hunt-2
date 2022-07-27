@@ -1,8 +1,37 @@
 import { useState } from 'react';
 import SearchBox from '../components/search-box/SearchBox';
 import CardList from '../components/card-list/CardList';
+import { getData } from '../utils/data';
 
-export function Index(props) {
+type origin ={
+  name: string
+}
+type location ={
+  name: string
+}
+
+export type resultsArray = {
+  id: string;
+  name: string;
+  status: string;
+  species: string;
+  gender: string;
+  image: string;
+  created: string;
+  origin: origin;
+  location: location;
+};
+
+export type character = {
+  info: object;
+  results: resultsArray[];
+};
+
+export type characterProps = {
+  data: character
+};
+
+export function Index(props: characterProps) {
   const { data } = props;
   const { results } = data;
   const [searchField, setSearchField] = useState('');
@@ -34,8 +63,7 @@ export function Index(props) {
 export default Index;
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://rickandmortyapi.com/api/character/`);
-  const data = await res.json();
+  const data = await getData<character>(`https://rickandmortyapi.com/api/character/`);
   if (!data) {
     return <p>Loading...</p>;
   }
