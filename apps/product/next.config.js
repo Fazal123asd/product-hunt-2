@@ -1,5 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNx = require('@nrwl/next/plugins/with-nx');
+const withPWA  = require("next-pwa");
+const runtimeCaching = require('next-pwa/cache')
+const withPlugins = require('next-compose-plugins');
 
 /**
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
@@ -14,6 +17,14 @@ const nextConfig = {
   images: {
     domains: ['rickandmortyapi.com'],
   },
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+    runtimeCaching
+  },
 };
 
-module.exports = withNx(nextConfig);
+const plugins = [[withPWA], [withNx]];
+
+module.exports = withPlugins(plugins, nextConfig);

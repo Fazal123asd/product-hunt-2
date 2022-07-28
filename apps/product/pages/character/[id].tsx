@@ -1,6 +1,7 @@
 import Card from '../../components/card/Card';
 import styled from 'styled-components';
 import { resultsArray } from '../../pages/index';
+import Link from 'next/link';
 
 type CharacterProps = {
   data: resultsArray;
@@ -22,6 +23,16 @@ export default function Character({ data }: CharacterProps) {
   const { id, name, status, species, gender, image, created, origin, location} = data
   
   return (
+    <>
+    <div style={{
+      padding:"0.5rem",
+      background:"black",
+      color:"white",
+    }}>
+      <Link href='/'><button style={{
+        cursor:"pointer"
+      }}>Go back</button></Link>
+    </div>
     <Container>
         <Card id={id}
                 name={name}
@@ -32,7 +43,9 @@ export default function Character({ data }: CharacterProps) {
                 created={created}
                 origin={origin}
                 location={location} />
+        
     </Container>
+    </>
   );
 }
 
