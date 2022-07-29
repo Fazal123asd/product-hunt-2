@@ -21,7 +21,12 @@ export default class CustomDocument extends Document<{
   render() {
     return (
       <Html>
-        <Head>{this.props.styleTags}</Head>
+        <Head>
+          {this.props.styleTags}
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png"></link>
+        </Head>
         <body>
           <Main />
           <NextScript />

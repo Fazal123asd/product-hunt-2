@@ -3,7 +3,7 @@ import SearchBox from '../components/search-box/SearchBox';
 import CardList from '../components/card-list/CardList';
 import { getData } from '../utils/data';
 import FilterReact from 'filter-react';
-import { FlexContainer, SearchBoxWrapper } from './styledIndex';
+import styled from 'styled-components';
 
 type origin = {
   name: string;
@@ -33,6 +33,19 @@ export type characterProps = {
   data: character;
 };
 
+const SearchBoxWrapper = styled('div')({
+  width: "100%",
+  '@media only screen and (min-width:768px)': {
+      width: '30%',
+  }
+})
+
+const FlexContainer = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '1rem',
+  alignItems: 'center',
+});
 
 export function Index(props: characterProps) {
   const { data } = props;
